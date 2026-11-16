@@ -23,6 +23,7 @@ que no encuentran espacios y cancelaciones tardías que dejan al tutor sin traba
 - **O3** Reservar o cancelar en un solo paso, con mensajes de error claros.
 - **O4** Reducir cancelaciones tardías (política de cancelación con anticipación mínima).
 - **O5** Distribuir equitativamente los cupos (máximo de tutorías activas por semana).
+- **O6** (Cambio 001) Dar a los tutores 10 minutos de descanso entre tutorías.
 
 ## Valor para el usuario
 Estudiante: autoservicio y certeza. Tutor: agenda sin conflictos. Institución: menos coordinación manual.

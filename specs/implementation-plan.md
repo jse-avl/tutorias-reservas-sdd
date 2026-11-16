@@ -13,3 +13,9 @@ Roles rotan por ciclo (ver `docs/ai-log.md`). Cada tarea = un Issue (`docs/issue
 
 ## Ciclo 2 — Cambio de especificación (mitad del proyecto)
 Ver `docs/change-request-001.md`. Issue #6, rama `feature/6-buffer-between-sessions`.
+
+### Tareas del Ciclo 2 (Issue #6)
+- T6a Actualizar specs y criterios (Product Lead)
+- T6b `has_overlap` con parámetro de buffer; aplicarlo en reserva y slots (Dev Lead)
+- T6c Ajustar AC-03/05/09, agregar AC-13..15 (QA Lead)
+- T6d Ejecutar suite completa y registrar resultados (QA Lead)
