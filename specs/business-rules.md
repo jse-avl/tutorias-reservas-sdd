@@ -10,5 +10,6 @@
 | BR-06 | Un estudiante tiene como máximo 3 reservas `confirmed` por semana calendario (lunes–domingo). | 409 `WEEKLY_LIMIT` |
 | BR-07 | Cancelar requiere al menos 2 horas de anticipación al inicio. | 409 `TOO_LATE_TO_CANCEL` |
 | BR-08 | Una reserva cancelada libera el horario inmediatamente. | — |
-| BR-09 | Intervalos son semiabiertos `[inicio, fin)`: una reserva que termina 10:00 y otra que inicia 10:00 NO se solapan. | — |
+| BR-09 | (Para estudiante; para tutor ver BR-11) Intervalos son semiabiertos `[inicio, fin)`: una reserva que termina 10:00 y otra que inicia 10:00 NO se solapan. | — |
+| BR-11 | **(Cambio 001)** Entre dos reservas `confirmed` del MISMO tutor debe haber al menos 10 minutos libres (buffer). No aplica al estudiante ni entre tutores distintos. Reemplaza la adyacencia exacta de BR-09 para el tutor. | 409 `TUTOR_CONFLICT` |
 | BR-10 | Inicios en múltiplos de 30 minutos. | 422 `INVALID_START` |

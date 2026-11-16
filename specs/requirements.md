@@ -11,6 +11,7 @@ Cada requisito referencia el outcome que sirve.
 | RF-05 | Crear una reserva (tutor, estudiante, inicio, duración). | O1, O3 |
 | RF-06 | Cancelar una reserva propia. | O3, O4 |
 | RF-07 | Listar reservas de un estudiante. | O3 |
+| RF-08 | (Cambio 001) El sistema aplica un buffer de 10 min entre reservas del mismo tutor, también al listar slots. | O6 |
 | RNF-01 | Toda operación de reserva es atómica (sin condiciones de carrera). | O1 |
 | RNF-02 | Errores devueltos con código y mensaje en español. | O3 |
 | RNF-03 | Sin dependencias externas (solo biblioteca estándar de Python). | — |
