@@ -38,7 +38,7 @@ class Acceptance(unittest.TestCase):
     def test_AC03_adjacent_bookings_allowed(self):
         db, t, s1, s2 = setup()
         book(db, t, s1, f"{TUE}T10:00")
-        b = book(db, t, s2, f"{TUE}T11:00", 30)
+        b = book(db, t, s2, f"{TUE}T11:30", 30)  # cambio 001: antes 11:00
         self.assertEqual(b["status"], "confirmed")
 
     def test_AC04_cancelled_slot_is_released(self):
@@ -48,9 +48,9 @@ class Acceptance(unittest.TestCase):
         self.assertEqual(book(db, t, s2, f"{TUE}T10:00")["student_id"], s2["id"])
 
     def test_AC05_free_slots_exclude_booked(self):
-        db, t, s1, _ = setup()
+        db, t, s1, _ = setup(("09:00", "13:00"))
         book(db, t, s1, f"{TUE}T10:00")
-        self.assertEqual(slots.free_slots(db, t["id"], TUE, 60, NOW), ["09:00", "11:00"])
+        self.assertEqual(slots.free_slots(db, t["id"], TUE, 60, NOW), ["11:30", "12:00"])
 
     def test_AC06_invalid_duration(self):
         db, t, s1, _ = setup()
@@ -74,10 +74,10 @@ class Acceptance(unittest.TestCase):
 
     def test_AC09_weekly_limit(self):
         db, t, s1, _ = setup(("08:00", "18:00"))
-        for h in ("08:00", "09:00", "10:00"):
+        for h in ("08:00", "09:30", "11:00"):  # cambio 001: huecos de buffer
             book(db, t, s1, f"{TUE}T{h}")
         with self.assertRaises(ConflictError) as cm:
-            book(db, t, s1, f"{TUE}T11:00")
+            book(db, t, s1, f"{TUE}T12:30")
         self.assertEqual(cm.exception.code, "WEEKLY_LIMIT")
 
     def test_AC10_cancellation_policy(self):
@@ -112,6 +112,28 @@ class Acceptance(unittest.TestCase):
         [th.join() for th in threads]
         self.assertEqual(results.count("ok"), 1)
         self.assertEqual(results.count("conflict"), 9)
+
+    def test_AC13_buffer_rejects_adjacent_same_tutor(self):
+        db, t, s1, s2 = setup()
+        book(db, t, s1, f"{TUE}T10:00")
+        with self.assertRaises(ConflictError) as cm:
+            book(db, t, s2, f"{TUE}T11:00", 30)
+        self.assertEqual(cm.exception.code, "TUTOR_CONFLICT")
+
+    def test_AC14_buffer_applies_before_booking_too(self):
+        db, t, s1, s2 = setup()
+        book(db, t, s1, f"{TUE}T10:00")
+        self.assertEqual(book(db, t, s2, f"{TUE}T09:00", 30)["status"], "confirmed")
+        s3 = registry.create_student(db, "Pedro", "pedro@utp.ac.pa")
+        with self.assertRaises(ConflictError):
+            book(db, t, s3, f"{TUE}T09:30", 30)
+
+    def test_AC15_buffer_not_applied_across_tutors(self):
+        db, t, s1, _ = setup()
+        t2 = registry.create_tutor(db, "Beto", "Física")
+        registry.add_availability(db, t2["id"], 1, "09:00", "12:00")
+        book(db, t, s1, f"{TUE}T10:00")
+        self.assertEqual(book(db, t2, s1, f"{TUE}T11:00", 30)["status"], "confirmed")
 
 
 if __name__ == "__main__":
