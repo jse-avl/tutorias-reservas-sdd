@@ -8,6 +8,7 @@ FMT = "%Y-%m-%dT%H:%M"
 DURATIONS = (30, 60)
 MAX_ACTIVE_PER_WEEK = 3
 CANCEL_MIN_HOURS = 2
+TUTOR_BUFFER_MINUTES = 10  # Cambio 001 (BR-11)
 
 
 def parse_dt(value, field="start"):
@@ -21,11 +22,13 @@ def fmt(dt):
     return dt.strftime(FMT)
 
 
-def has_overlap(conn, column, owner_id, start, end):
-    """BR-09: intervalos semiabiertos [start, end). Solo cuentan reservas 'confirmed'."""
+def has_overlap(conn, column, owner_id, start, end, buffer_minutes=0):
+    """BR-09/BR-11: intervalos semiabiertos [start, end) ampliados por el buffer.
+    Solo cuentan reservas 'confirmed'."""
+    pad = timedelta(minutes=buffer_minutes)
     row = conn.execute(
         f"SELECT 1 FROM bookings WHERE {column}=? AND status='confirmed' AND start < ? AND end > ? LIMIT 1",
-        (owner_id, fmt(end), fmt(start))).fetchone()
+        (owner_id, fmt(end + pad), fmt(start - pad))).fetchone()
     return row is not None
 
 
@@ -53,8 +56,8 @@ def create_booking(db, tutor_id, student_id, start, minutes, now):
     with db.tx() as c:  # sección crítica: verificar + insertar es atómico
         if not within_availability(c, tutor_id, start_dt, end_dt):
             raise ValidationError("OUTSIDE_AVAILABILITY", "El horario está fuera de la disponibilidad del tutor.")
-        if has_overlap(c, "tutor_id", tutor_id, start_dt, end_dt):
-            raise ConflictError("TUTOR_CONFLICT", "El tutor ya tiene una reserva en ese horario.")
+        if has_overlap(c, "tutor_id", tutor_id, start_dt, end_dt, TUTOR_BUFFER_MINUTES):
+            raise ConflictError("TUTOR_CONFLICT", "El tutor ya tiene una reserva en ese horario (se requieren 10 min de descanso entre tutorías).")
         if has_overlap(c, "student_id", student_id, start_dt, end_dt):
             raise ConflictError("STUDENT_CONFLICT", "Ya tienes otra tutoría en ese horario.")
         monday = (start_dt - timedelta(days=start_dt.weekday())).replace(hour=0, minute=0)

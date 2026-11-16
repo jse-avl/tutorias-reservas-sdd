@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 from . import registry
-from .bookings import DURATIONS, has_overlap
+from .bookings import DURATIONS, TUTOR_BUFFER_MINUTES, has_overlap
 from .errors import ValidationError
 
 
@@ -26,7 +26,7 @@ def free_slots(db, tutor_id, date, minutes, now):
             limit = day.replace(hour=h, minute=m)
             while cursor + timedelta(minutes=minutes) <= limit:
                 end = cursor + timedelta(minutes=minutes)
-                if cursor > now and not has_overlap(c, "tutor_id", tutor_id, cursor, end):
+                if cursor > now and not has_overlap(c, "tutor_id", tutor_id, cursor, end, TUTOR_BUFFER_MINUTES):
                     result.add(cursor.strftime("%H:%M"))
                 cursor += timedelta(minutes=30)
     return sorted(result)
