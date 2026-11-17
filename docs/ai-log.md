@@ -1,12 +1,19 @@
 # AI Development Log
 
-| # | Actividad | IA utilizada | Solicitud | Resultado | Decisión |
-|---|-----------|--------------|-----------|-----------|----------|
-| 1 | Lectura del enunciado | Claude Code (agente CLI/desktop) | Leer el PDF del proyecto y desarrollarlo | Resumen de requisitos y estructura de entrega | Elegir dominio Tutorías universitarias |
-| 2 | ODD | Claude Code | Redactar problema, preguntas de exploración y outcomes | `specs/outcomes.md` | Revisado por Product Lead (Jose); se aceptan O1–O5 |
-| 3 | SDD | Claude Code | Convertir outcomes en requisitos, reglas, API, criterios Given/When/Then, plan | `specs/*.md` | Aceptado; se fijó límite semanal 3 y cancelación 2 h |
-| 4 | Implementación | Claude Code | Implementar servicio, SQLite y API según specs | `src/tutorias/*` | Aceptado tras revisión de Dev Lead (Yireikis) |
-| 5 | Pruebas | Claude Code | Un test por criterio de aceptación + concurrencia | `tests/*` | Un test falló por expectativa errónea (slots cada 30 min): se corrigió el test, no el código (D-05) |
-| 6 | Cambio de spec 001 | Claude Code | Aplicar buffer de 10 min siguiendo el ciclo spec→código | Ver `change-request-001.md` | Aceptado tras revisión de QA (Yireikis) |
+Roles: **Jose** = Product/Spec Lead · **Yire** = Architecture/Dev Lead · **Chris** = QA/DevOps Lead (ciclo 1).
+Ciclo 2 (cambio 001) rota: Chris = Spec, Jose = Dev, Yire = QA.
 
-> Nota: los equipos deben añadir aquí cualquier uso adicional de IA y la verificación humana realizada.
+| # | Actividad | IA utilizada | Solicitud | Resultado | Decisión / verificación humana |
+|---|-----------|--------------|-----------|-----------|--------------------------------|
+| 1 | Lectura del enunciado | Claude Code (agente de escritorio) | Leer el PDF del proyecto y desarrollarlo | Resumen de requisitos y estructura de entrega | Jose pidió "desarrolla el proyecto según el PDF". La IA eligió el dominio *Tutorías universitarias* (D-02) y Jose lo aceptó al continuar. |
+| 2 | ODD | Claude Code | Redactar problema, preguntas de exploración y outcomes | `specs/outcomes.md` | Propuesto por la IA. **Pendiente:** validación de Jose como Product Lead (ver PR #8). |
+| 3 | SDD | Claude Code | Convertir outcomes en requisitos, reglas, API, criterios y plan | `specs/*.md` | Propuesto por la IA (límite semanal 3, cancelación 2 h, slots de 30 min). **Pendiente:** validación de Jose. |
+| 4 | Implementación | Claude Code | Implementar servicio, SQLite y API según specs | `src/tutorias/*` | Generado por la IA. **Pendiente:** revisión de código de Yire (ver PR #8). |
+| 5 | Pruebas | Claude Code | Un test por criterio de aceptación + concurrencia | `tests/*` | Generado por la IA. Un test falló por expectativa errónea (slots cada 30 min): se corrigió el test, no el código (D-05). **Pendiente:** revisión de Chris. |
+| 6 | Cambio de spec 001 | Claude Code | Aplicar buffer de 10 min siguiendo el ciclo spec→código | `docs/change-request-001.md` | El cambio fue planteado como ejercicio por la IA/Jose para demostrar el ciclo. **Pendiente:** revisión de Yire (QA ciclo 2). |
+| 7 | Publicación en GitHub | Claude Code | Crear repo, issues y PR | Repo `tutorias-reservas-sdd`, issues #1–#7, PR #8 | Jose autorizó; Yire y Chris facilitaron tokens y solo se usaron para crear/ver elementos propios de su rol. |
+
+## Verificación humana (completar con revisiones reales)
+- [ ] Jose revisó outcomes/specs
+- [ ] Yire revisó arquitectura y código
+- [ ] Chris revisó pruebas y ejecutó la suite
