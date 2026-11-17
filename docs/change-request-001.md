@@ -1,5 +1,7 @@
 # Cambio de especificación 001 (a mitad del desarrollo)
 
+> Nota de transparencia: este cambio lo planteó el equipo/IA como ejercicio para demostrar el ciclo completo; no proviene de un cliente real. El profesor pedirá cambios adicionales en la presentación.
+
 **Solicitud (inesperada):** "Los tutores necesitan 10 minutos entre tutorías para descansar y preparar material."
 
 ## Ciclo ejecutado

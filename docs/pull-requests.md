@@ -1,12 +1,14 @@
 # Pull Requests / revisión
 
-Al no haber remoto configurado, cada PR se registró como rama + commit de merge `--no-ff` (revisión equivalente). Al publicar en GitHub, abrir los PR con estas descripciones.
+Las ramas `feature/1..6` se fusionaron **localmente** con commits de merge `--no-ff` antes de subir el repo a GitHub
+(por eso no existen como PR en GitHub). Los cambios posteriores sí van por PR real.
 
-| PR | Rama | Autor | Revisor | Checklist |
-|----|------|-------|---------|-----------|
-| #1 | feature/1-core-data | Yireikis | Jose (specs) | modelo coincide con `data-model.md` |
-| #3 | feature/3-booking-rules | Yireikis | Christian | reglas BR-xx cubiertas |
-| #2 | feature/2-slots | Yireikis | Christian | AC-05 |
-| #4 | feature/4-http-api | Yireikis | Jose | coincide con `api.md` |
-| #5 | feature/5-tests | Christian | Yireikis | AC-01..12 + concurrencia |
-| #6 | feature/6-buffer-between-sessions | Jose/Christian/Yireikis | Yireikis | specs→código→tests, 25 OK |
+| Cambio | Rama | Issue | Autor | Revisión |
+|--------|------|-------|-------|----------|
+| Core data | feature/1-core-data | #1 | Yire | merge local, sin revisión formal |
+| Booking rules | feature/3-booking-rules | #3 | Yire | merge local, sin revisión formal |
+| Slots | feature/2-slots | #2 | Yire | merge local, sin revisión formal |
+| HTTP API | feature/4-http-api | #4 | Yire | merge local, sin revisión formal |
+| Tests | feature/5-tests | #5 | Chris | merge local, sin revisión formal |
+| Cambio 001 | feature/6-buffer-between-sessions | #6 | Chris/Jose | merge local, sin revisión formal |
+| AI log, issues, presentación | docs/7-ai-log-issues-presentacion | #7 | Jose | **PR #8 en GitHub**: revisan Yire y Chris |
