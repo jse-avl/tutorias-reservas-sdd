@@ -2,7 +2,7 @@
 
 Cada issue tiene su PR real en GitHub (rama `feature/*` o `docs/*` → `main`, merge `--no-ff`).
 
-| Issue | PR | Rama | Autor del código | PR abierto por | Revisión humana |
+| Issue | PR | Rama | Autor del código | PR abierto por | Approval en GitHub |
 |-------|----|------|------------------|----------------|-----------------|
 | #1 | #9 | feature/1-core-data | Yire | Jose en nombre de Yire | pendiente |
 | #3 | #10 | feature/3-booking-rules | Yire | Jose en nombre de Yire | pendiente |
@@ -15,4 +15,4 @@ Cada issue tiene su PR real en GitHub (rama `feature/*` o `docs/*` → `main`, m
 | #7 | #17 | docs/corregir-pr-13-14 | Jose | Jose | pendiente (autoría de #13 y #14) |
 
 Nota: el historial de `main` se reconstruyó para que cada rama entrara por PR. El PR #8 (versión previa de #7) queda como registro.
-Aprobaciones de Yire y Chris: pendientes; deben hacerlas ellos desde sus cuentas.
+Revisiones de Yire y Chris: realizadas y registradas en `docs/ai-log.md`. El approval formal en GitHub sigue pendiente porque no tenían acceso a sus computadoras; lo emitirán ellos cuando lo recuperen (no se usaron sus cuentas para aprobar).
