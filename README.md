@@ -27,7 +27,7 @@ En PowerShell: `$env:PYTHONPATH="src"; python -m tutorias --port 8000`.
 
 ## Estructura
 - `specs/` outcomes, requisitos, reglas, arquitectura, modelo, API, criterios de aceptación, plan
-- `docs/` `ai-log.md`, `decisions.md`, `testing.md`, `issues.md`, `pull-requests.md`, `change-request-001.md`, `CHANGELOG.md` y `presentacion/`
+- `docs/` `ai-log.md`, `decisions.md`, `testing.md`, `issues.md`, `pull-requests.md`, `change-request-001.md` y `CHANGELOG.md`
 - `src/tutorias/` código · `tests/` pruebas automatizadas
 
 ## Flujo de trabajo
