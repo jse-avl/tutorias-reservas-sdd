@@ -5,7 +5,7 @@ Proyecto 2 — Tópicos Especiales II (Prof. Regis Rivera). Flujo: **ODD → SDD
 ## Equipo y roles (rotan por ciclo)
 | Ciclo | Product / Spec Lead | Architecture / Dev Lead | QA / DevOps Lead |
 |-------|--------------------|-------------------------|------------------|
-| 1 — MVP | Jose Avila | Yireikis Abrego | Christian Dutary |
+| 1 — MVP | Jose Avila (Product/Spec) | Yireikis Abrego (Arch/Dev) | Christian Dutary (QA/DevOps) |
 | 2 — Cambio de especificación | Christian Dutary | Jose Avila | Yireikis Abrego |
 
 ## Problema y outcome
