@@ -1,6 +1,7 @@
 # Estrategia de pruebas
 
-Ejecutar: `PYTHONPATH=src:tests python -m unittest discover -s tests -v` (o `python -m unittest discover -s tests`, helpers ajusta `sys.path`).
+Ejecutar desde la raíz: `python -m unittest discover -s tests -v` (`tests/helpers.py` ajusta `sys.path`, no hace falta `PYTHONPATH`).
+Total: **25 pruebas** (16 de aceptación en `test_acceptance.py`, incluida AC-12 de concurrencia).
 
 | Archivo | Cubre |
 |---------|-------|

@@ -10,13 +10,15 @@
 
 ## Capas
 ```
- HTTP (api.py)  ->  Servicio de dominio (service.py)  ->  SQLite (schema en service.py)
-   JSON/errores        reglas BR-xx, atomicidad             tutors, availability, students, bookings
+ HTTP (api.py)  ->  Dominio (registry.py / slots.py / bookings.py)  ->  SQLite (db.py)
+   JSON/errores        reglas BR-xx, validaciones                        schema, transacciones
 ```
-- `service.py` no conoce HTTP: es testeable de forma aislada. Recibe `now` por parámetro para pruebas deterministas.
+- El dominio no conoce HTTP: es testeable de forma aislada. `registry.py` registra tutores, estudiantes y
+  disponibilidad; `slots.py` calcula horarios libres; `bookings.py` aplica las reglas BR-xx de reserva y
+  cancelación. Las funciones de reserva reciben `now` por parámetro para pruebas deterministas.
 - `api.py` traduce excepciones de dominio a códigos HTTP (ValidationError→422, ConflictError→409, NotFoundError→404).
-- Atomicidad (RNF-01): cada reserva corre dentro de `BEGIN IMMEDIATE` + `threading.Lock`, por lo que
-  verificar-conflicto e insertar son una sola sección crítica.
+- Atomicidad (RNF-01): cada reserva corre dentro de `Database.tx()` (`db.py`), que usa `BEGIN IMMEDIATE` +
+  `threading.Lock`; verificar-conflicto e insertar son una sola sección crítica.
 
 ## Ejecución
 `python -m tutorias --port 8000` (ver README).
